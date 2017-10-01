@@ -1,24 +1,56 @@
-def quick_sort(list)
-  qsort_helper(list).flatten
+def quicksort(array, from=0, to=nil)
+    if to == nil
+        # Sort the whole array, by default
+        to = array.count - 1
+    end
+
+    if from >= to
+        # Done sorting
+        return
+    end
+
+    # Take a pivot value, at the far left
+    pivot = array[from]
+
+    # Min and Max pointers
+    min = from
+    max = to
+
+    # Current free slot
+    free = min
+
+    while min < max
+        if free == min # Evaluate array[max]
+            if array[max] <= pivot # Smaller than pivot, must move
+                array[free] = array[max]
+                min += 1
+                free = max
+            else
+                max -= 1
+            end
+        elsif free == max # Evaluate array[min]
+            if array[min] >= pivot # Bigger than pivot, must move
+                array[free] = array[min]
+                max -= 1
+                free = min
+            else
+                min += 1
+            end
+        else
+            raise "Inconsistent state"
+        end
+    end
+
+    array[free] = pivot
+
+    quicksort array, from, free - 1
+    quicksort array, free + 1, to
 end
- 
-def qsort_helper(list)
-  return [] if list.empty?
- 
-  number        = list.sample
-  lower, higher = list.partition { |n| n < number }
- 
-  higher.delete_at(higher.index(number))
- 
-  [qsort_helper(lower), number, qsort_helper(higher)]
-end
-
-# data before sorting
-p quick_sort [3, 7, 2, 1, 8, 12, 5, 22, 11, 4, 15]
-
-# result 
-# [1, 2, 3, 4, 5, 7, 8, 11, 12, 15, 22]
 
 
-
-
+a = [1,99,2,98,3,97,4,96,4,95,5,94].shuffle
+# Quicksort operates inplace (i.e. in "a" itself)
+# There's no need to reassign
+quicksort a
+puts "quicksort"
+puts a
