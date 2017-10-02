@@ -1,0 +1,7 @@
+name: quicksort
+version: 1.0.0
+description: dart implementation of quicksort
+author: Hanbrolo117
+
+dependencies:
+  mockito: "^2.2.0"
