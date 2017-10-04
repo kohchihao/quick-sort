@@ -7,9 +7,9 @@ class Test {
   static void run() {
     for (final List<int> testCase in [smallKnownList(), bigShuffledList()]) {
       Quick.sort(testCase);
-      if (!Test.sorted(testCase)) throw new AssertionError("Failed to QuickSort!");
+      if (!Test.sorted(testCase)) throw new AssertionError("Failed to Quicksort!");
     }
-    print("All Tests Pass! :D");
+    print("All tests pass.");
   }
 
   static List<int> smallKnownList() => [1,99,2,98,3,97,4,96,4,95,5,94];
@@ -37,9 +37,9 @@ class Quick {
   }
 
   // Hoare Partitioning, robust to Dutch National Flag Problem.
-  // Returns a list containing 2 elements:
-  //    [0] = index left of the pivot
-  //    [1] = index right of the pivot
+  // Returns a list containing 2 ints:
+  //    [0] = left part index
+  //    [1] = right part index
   static List<int> _partition(List<int> arr, int lo, int hi) {
     final pivot = arr[hi];
     var left = lo - 1;
